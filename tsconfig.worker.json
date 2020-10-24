@@ -2,11 +2,11 @@
     "compileOnSave" : true,
 
     "compilerOptions": {
-        "target": "es2017",
-        "lib": [ "es2017", "dom" ],
-        "module": "es6",
+        "target": "esnext",
+        "lib": [ "esnext", "webworker" ],
+        "module": "esnext",
 
-        "outDir": "web/scripts",
+        "outDir": "web/",
 
         "noEmitOnError": true,
         "removeComments": true,
@@ -14,9 +14,8 @@
         "strict": true,
         "useDefineForClassFields": true
     },
-
+    "include": ["src/worker.ts"],
     "exclude": [
         "game/*",
-        "src/worker.ts"
     ]
 }

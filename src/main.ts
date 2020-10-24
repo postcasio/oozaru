@@ -36,10 +36,23 @@ import Pegasus from './pegasus.js';
 
 main();
 
+async function installServiceWorker() {
+	const reg = await navigator.serviceWorker.register('/worker.js', { scope: './' });
+
+	if(reg.installing) {
+		console.log('Service worker installing');
+	} else if(reg.waiting) {
+		console.log('Service worker installed');
+	} else if(reg.active) {
+		console.log('Service worker active');
+	}
+}
+
+
 async function main()
 {
-	const urlQuery = new URL(location.href).searchParams;
-	const gameID = urlQuery.get('game');
+
+	await installServiceWorker();
 
 	// use event handling to intercept errors originating inside the Sphere sandbox, rather than a
 	// try-catch.  otherwise the debugger thinks the error is handled and doesn't do a breakpoint,
@@ -74,7 +87,7 @@ async function main()
 			powerText.classList.remove('visible');
 			canvas.focus();
 			Pegasus.initialize(inputEngine);
-			await Pegasus.launchGame(`dist`);
+			await Pegasus.launchGame(`dist.spk`);
 		}
 	};
 }
